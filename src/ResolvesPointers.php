@@ -3,7 +3,6 @@
 namespace SimpleSoftwareIO\SqsDisk;
 
 use Illuminate\Support\Arr;
-use Illuminate\Container\Container;
 use Illuminate\Filesystem\FilesystemAdapter;
 
 trait ResolvesPointers
@@ -25,6 +24,6 @@ trait ResolvesPointers
      */
     protected function resolveDisk(): FilesystemAdapter
     {
-        return Container::getInstance()->make('filesystem')->disk(Arr::get($this->diskOptions, 'disk'));
+        return $this->container->make('filesystem')->disk(Arr::get($this->diskOptions, 'disk'));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace SimpleSoftwareIO\SqsDisk;
 
-use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class SqsDiskServiceProvider extends ServiceProvider
@@ -12,7 +11,7 @@ class SqsDiskServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $manager = Container::getInstance()->make('queue');
+        $manager = $this->app->make('queue');
         $manager->addConnector('sqs-disk', fn () => new SqsDiskConnector());
     }
 }
