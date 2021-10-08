@@ -1,0 +1,49 @@
+{
+    "name": "simplesoftwareio/simple-sqs-extended-client",
+    "description": "Simple SQS Extended Client is a SQS driver for Laravel that supports extended payloads beyond 256kb.",
+    "keywords": [
+        "laravel",
+        "simple",
+        "sqs",
+        "extended",
+        "driver"
+    ],
+    "homepage": "https://www.simplesoftware.io/#/docs/simple-sqs-extended-client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simple Software LLC",
+            "email": "support@simplesoftware.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "aws/aws-sdk-php": "^3.189.0",
+        "league/flysystem": "^1.1",
+        "illuminate/container": "^v8.0.0",
+        "illuminate/contracts": "^v8.0.0",
+        "illuminate/filesystem": "^v8.0.0",
+        "illuminate/queue": "^v8.0.0",
+        "illuminate/support": "^v8.0.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "~1",
+        "phpunit/phpunit": "~9",
+        "friendsofphp/php-cs-fixer": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleSoftwareIO\\SqsDisk\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SimpleSoftwareIO\\SqsDisk\\SqsDiskServiceProvider"
+            ]
+        }
+    }
+}
