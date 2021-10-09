@@ -9,7 +9,7 @@ class SqsDiskServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      */
-    public function register()
+    public function boot()
     {
         $manager = $this->app->make('queue');
         $manager->addConnector('sqs-disk', fn () => new SqsDiskConnector());
