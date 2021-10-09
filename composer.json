@@ -8,7 +8,7 @@
         "extended",
         "driver"
     ],
-    "homepage": "https://www.simplesoftware.io/#/docs/simple-sqs-extended-client",
+    "homepage": "https://github.com/SimpleSoftwareIO/simple-sqs-extended-client",
     "license": "MIT",
     "authors": [
         {
