@@ -5,6 +5,7 @@ namespace SimpleSoftwareIO\Tests\SqsDisk;
 use Mockery;
 use Aws\Sqs\SqsClient;
 use PHPUnit\Framework\TestCase;
+use Illuminate\Container\Container;
 use SimpleSoftwareIO\SqsDisk\SqsDiskJob;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -29,7 +30,7 @@ class SqsDiskJobTest extends TestCase
 
         $this->mockedSqsClient = Mockery::mock(SqsClient::class);
         $this->mockedFilesystemAdapter = Mockery::mock(FilesystemAdapter::class);
-        $this->mockedContainer = Mockery::mock('Illuminate\Container\Container');
+        $this->mockedContainer = Mockery::mock(Container::class);
     }
 
     public function testItRemovesTheJobFromTheDiskIfCleanupIsEnabled()

@@ -167,11 +167,7 @@ class SqsDiskQueue extends SqsQueue
      */
     public function clear($queue)
     {
-        return tap($this->size($queue), function () use ($queue) {
-            $this->sqs->purgeQueue([
-                'QueueUrl' => $this->getQueue($queue),
-            ]);
-
+        return tap(parent::clear($queue), function () {
             if (Arr::get($this->diskOptions, 'cleanup') && Arr::get($this->diskOptions, 'prefix')) {
                 $this->resolveDisk()->deleteDirectory(Arr::get($this->diskOptions, 'prefix'));
             }
