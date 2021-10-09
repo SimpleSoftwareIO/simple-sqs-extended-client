@@ -53,6 +53,6 @@ You may request professional support by email support@simplesoftware.io.  All re
           'prefix' => 'stage', // The prefix to apply to the files before beign strored on the disk
       ],
   ],
+```
 
 4. Boot up your queues and profit without having to worry about SQS's 256KB limit :)
-```
