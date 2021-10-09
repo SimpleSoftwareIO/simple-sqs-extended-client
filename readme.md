@@ -50,7 +50,7 @@ You may request professional support by email support@simplesoftware.io.  All re
           'always_store' => false,
           'cleanup' => false,
           'disk' => env('SQS_DISK'),
-          'prefix' => 'stage',
+          'prefix' => 'bucket-prefix',
       ],
   ],
 ```
