@@ -47,10 +47,10 @@ You may request professional support by email support@simplesoftware.io.  All re
       'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
       'after_commit' => false,
       'disk_options' => [
-          'always_store' => false, // Decides if all payloads should be stored on the disk
-          'cleanup' => false, //Decides if the payloads should be removed from the disk when the job is completed
+          'always_store' => false,
+          'cleanup' => false,
           'disk' => env('SQS_DISK'),
-          'prefix' => 'stage', // The prefix to apply to the files before beign strored on the disk
+          'prefix' => 'stage',
       ],
   ],
 ```
