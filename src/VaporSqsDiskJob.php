@@ -2,10 +2,10 @@
 
 namespace SimpleSoftwareIO\SqsDisk;
 
-use Illuminate\Queue\Jobs\SqsJob;
+use Laravel\Vapor\Queue\VaporJob;
 use Illuminate\Contracts\Queue\Job as JobContract;
 
-class SqsDiskJob extends SqsJob implements JobContract
+class VaporSqsDiskJob extends VaporJob implements JobContract
 {
     use SqsDiskBaseJob;
 }

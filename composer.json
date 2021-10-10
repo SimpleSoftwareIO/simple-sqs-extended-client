@@ -31,6 +31,9 @@
         "phpunit/phpunit": "~9",
         "friendsofphp/php-cs-fixer": "^3.2"
     },
+    "suggest": {
+        "laravel/vapor-core": "Allows SQS disk based storage while using Laravel Vapor."
+    },
     "autoload": {
         "psr-4": {
             "SimpleSoftwareIO\\SqsDisk\\": "src"
