@@ -19,7 +19,7 @@ class VaporWorkCommand extends LaravelVaporWorkCommand
 
         $queue = $this->worker->getManager()->connection('sqs');
 
-        return new SqsDiskJob(
+        return new VaporSqsDiskJob(
             $this->laravel,
             $queue->getSqs(),
             $normalizedMessage,
