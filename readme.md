@@ -18,7 +18,7 @@ You may request professional support by email support@simplesoftware.io.  All re
 
 3. Then, add the following default queue settings to your `queue.php` file.
 
-> Laravel Vapor uses must leave the connection name set to `sqs`.  The `sqs` connection is looked for within Vapor Core and this library will not work as expected if you use a different connection name.
+> Laravel Vapor users must set the connection name set to `sqs`.  The `sqs` connection is looked for within Vapor Core and this library will not work as expected if you use a different connection name.
 
 ```
   /*
