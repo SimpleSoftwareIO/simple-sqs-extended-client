@@ -1,6 +1,6 @@
 # Simple SQS Extended Client
-## Introduction
 
+## Introduction
 
 Simple SQS Extended Client is a Laravel queue driver that was designed to work around the AWS SQS 256KB payload size limits.  This queue driver will automatically serialize large payloads to a disk (typically S3) and then unserialize them at run time. 
 
@@ -17,6 +17,8 @@ You may request professional support by email support@simplesoftware.io.  All re
 2. Run `composer require simplesoftwareio/simple-sqs-extended-client "~1"` to install the queue driver. 
 
 3. Then, add the following default queue settings to your `queue.php` file.
+
+> Laravel Vapor uses must leave the connection name set to `sqs`.  The `sqs` connection is looked for within Vapor Core and this library will not work as expected if you use a different connection name.
 
 ```
   /*
@@ -37,7 +39,7 @@ You may request professional support by email support@simplesoftware.io.  All re
   |                 sharing the same disk.
   |
   */
-  'sqs-disk' => [
+  'sqs' => [
       'driver' => 'sqs-disk',
       'key' => env('AWS_ACCESS_KEY_ID'),
       'secret' => env('AWS_SECRET_ACCESS_KEY'),
