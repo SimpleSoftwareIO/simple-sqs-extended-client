@@ -6,7 +6,7 @@ Simple SQS Extended Client is a Laravel queue driver that was designed to work a
 
 ## Support
 
-You may request professional support by email support@simplesoftware.io.  All requests for support require a $200 / hour fee.  All other support will be provided by the open source community.
+You may request professional support by emailing support@simplesoftware.io.  All requests for support require a $200 / hour fee.  All other support will be provided by the open source community.
 
 ## Install
 
