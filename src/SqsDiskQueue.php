@@ -15,7 +15,7 @@ class SqsDiskQueue extends SqsQueue
      *
      * @var int
      */
-    public const MAX_SQS_LENGTH = 262144;
+    public const MAX_SQS_LENGTH = 250000;
 
     /**
      * The Amazon SQS instance.
