@@ -19,12 +19,12 @@
     "require": {
         "php": ">=8.0",
         "aws/aws-sdk-php": "^3.189.0",
-        "league/flysystem": "^1.1",
-        "illuminate/container": "^v8.0.0",
-        "illuminate/contracts": "^v8.0.0",
-        "illuminate/filesystem": "^v8.0.0",
-        "illuminate/queue": "^v8.0.0",
-        "illuminate/support": "^v8.0.0"
+        "league/flysystem": "^3.0",
+        "illuminate/container": "^9.0.0",
+        "illuminate/contracts": "^9.0.0",
+        "illuminate/filesystem": "^9.0.0",
+        "illuminate/queue": "^9.0.0",
+        "illuminate/support": "^9.0.0"
     },
     "require-dev": {
         "mockery/mockery": "~1",
