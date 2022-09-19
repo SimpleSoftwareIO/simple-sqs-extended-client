@@ -106,7 +106,7 @@ class SqsDiskQueue extends SqsQueue
             ])->get('MessageId');
         }
 
-        return parent::pushRaw($payload, $queue, $options);
+        return parent::pushRaw($payload, $queue, $options, $delay);
     }
 
     /**
