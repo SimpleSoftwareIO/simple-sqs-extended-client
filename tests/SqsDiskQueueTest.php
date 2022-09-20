@@ -82,7 +82,6 @@ class SqsDiskQueueTest extends TestCase
             ->with([
                 'QueueUrl' => '/default',
                 'MessageBody' => $this->mockedPointerPayload,
-                'DelaySeconds' => 0,
             ])
             ->once()
             ->andReturnSelf();
@@ -120,7 +119,6 @@ class SqsDiskQueueTest extends TestCase
             ->with([
                 'QueueUrl' => '/default',
                 'MessageBody' => $this->mockedPointerPayload,
-                'DelaySeconds' => 0,
             ])
             ->once()
             ->andReturnSelf();
@@ -140,7 +138,7 @@ class SqsDiskQueueTest extends TestCase
         $sqsDiskQueue->pushRaw($this->mockedPayload);
     }
 
-    public function testItDelaysAJob()
+    public function testItCanDelayAJobWhenPushedToDisk()
     {
         $this->mockedFilesystemAdapter->shouldReceive('disk')
             ->with('s3')
@@ -165,6 +163,33 @@ class SqsDiskQueueTest extends TestCase
 
         $diskOptions = [
             'always_store' => true,
+            'cleanup' => true,
+            'disk' => 's3',
+            'prefix' => 'prefix',
+        ];
+
+        $sqsDiskQueue = new SqsDiskQueue($this->mockedSqsClient, 'default', $diskOptions);
+        $sqsDiskQueue->setContainer($this->mockedContainer);
+        $sqsDiskQueue->later(10, 'foo');
+    }
+
+    public function testItCanDelayAJobWhenNotPushedToDisk()
+    {
+        $this->mockedFilesystemAdapter->shouldReceive('disk')
+            ->never();
+
+        $this->mockedSqsClient->shouldReceive('sendMessage')
+            ->with(Mockery::on(function ($arguments) {
+                return $arguments['DelaySeconds'] === 10;
+            }))
+            ->once()
+            ->andReturnSelf();
+
+        $this->mockedSqsClient->shouldReceive('get')
+            ->once();
+
+        $diskOptions = [
+            'always_store' => false,
             'cleanup' => true,
             'disk' => 's3',
             'prefix' => 'prefix',

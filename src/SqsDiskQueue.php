@@ -92,21 +92,24 @@ class SqsDiskQueue extends SqsQueue
      */
     public function pushRaw($payload, $queue = null, array $options = [], $delay = 0)
     {
-        $payloadLength = strlen($payload);
+        $message = [
+            'QueueUrl' => $this->getQueue($queue),
+            'MessageBody' => $payload,
+        ];
 
-        if ($payloadLength >= self::MAX_SQS_LENGTH || Arr::get($this->diskOptions, 'always_store')) {
+        if (strlen($payload) >= self::MAX_SQS_LENGTH || Arr::get($this->diskOptions, 'always_store')) {
             $uuid = json_decode($payload)->uuid;
             $filepath = Arr::get($this->diskOptions, 'prefix', '') . "/{$uuid}.json";
             $this->resolveDisk()->put($filepath, $payload);
 
-            return $this->sqs->sendMessage([
-                'QueueUrl' => $this->getQueue($queue),
-                'MessageBody' => json_encode(['pointer' => $filepath]),
-                'DelaySeconds' => $this->secondsUntil($delay),
-            ])->get('MessageId');
+            $message['MessageBody'] = json_encode(['pointer' => $filepath]);
         }
 
-        return parent::pushRaw($payload, $queue, $options);
+        if ($delay) {
+            $message['DelaySeconds'] = $this->secondsUntil($delay);
+        }
+
+        return $this->sqs->sendMessage($message)->get('MessageId');
     }
 
     /**
