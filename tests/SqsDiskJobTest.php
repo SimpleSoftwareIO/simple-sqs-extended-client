@@ -37,14 +37,17 @@ class SqsDiskJobTest extends TestCase
     {
         $this->mockedFilesystemAdapter->shouldReceive('disk')
             ->with('s3')
+            ->once()
             ->andReturnSelf();
 
         $this->mockedFilesystemAdapter->shouldReceive('delete')
             ->with('prefix/e3cd03ee-59a3-4ad8-b0aa-ee2e3808ac81.json')
+            ->once()
             ->andReturnSelf();
 
         $this->mockedContainer->shouldReceive('make')
             ->with('filesystem')
+            ->once()
             ->andReturn($this->mockedFilesystemAdapter);
 
         $this->mockedSqsClient->shouldReceive('deleteMessage');
