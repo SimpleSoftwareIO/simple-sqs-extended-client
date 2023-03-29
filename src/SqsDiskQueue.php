@@ -3,6 +3,9 @@
 namespace SimpleSoftwareIO\SqsDisk;
 
 use Aws\Sqs\SqsClient;
+use DateInterval;
+use DateTimeInterface;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Support\Arr;
 use Illuminate\Queue\SqsQueue;
 
@@ -18,49 +21,21 @@ class SqsDiskQueue extends SqsQueue
     public const MAX_SQS_LENGTH = 250000;
 
     /**
-     * The Amazon SQS instance.
-     *
-     * @var \Aws\Sqs\SqsClient
-     */
-    protected $sqs;
-
-    /**
-     * The name of the default queue.
-     *
-     * @var string
-     */
-    protected $default;
-
-    /**
      * The disk options to save large payloads.
      *
      * @var array
      */
-    protected $diskOptions;
-
-    /**
-     * The queue URL prefix.
-     *
-     * @var string
-     */
-    protected $prefix;
-
-    /**
-     * The queue name suffix.
-     *
-     * @var string
-     */
-    private $suffix;
+    protected array $diskOptions;
 
     /**
      * Create a new Amazon SQS queue instance.
      *
-     * @param  \Aws\Sqs\SqsClient  $sqs
+     * @param SqsClient $sqs
      * @param  string  $default
      * @param  array  $diskOptions
      * @param  string  $prefix
      * @param  string  $suffix
-     * @param  bool  $dispatchAfterCommit
+     * @param bool $dispatchAfterCommit
      *
      * @return void
      */
@@ -72,12 +47,9 @@ class SqsDiskQueue extends SqsQueue
         $suffix = '',
         $dispatchAfterCommit = false,
     ) {
-        $this->sqs = $sqs;
-        $this->default = $default;
         $this->diskOptions = $diskOptions;
-        $this->prefix = $prefix;
-        $this->suffix = $suffix;
-        $this->dispatchAfterCommit = $dispatchAfterCommit;
+
+        parent::__construct($sqs, $default, $prefix, $suffix, $dispatchAfterCommit);
     }
 
     /**
@@ -115,7 +87,7 @@ class SqsDiskQueue extends SqsQueue
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTimeInterface|\DateInterval|int  $delay
+     * @param  DateTimeInterface|DateInterval|int  $delay
      * @param  string  $job
      * @param  mixed  $data
      * @param  string|null  $queue
@@ -140,7 +112,7 @@ class SqsDiskQueue extends SqsQueue
      *
      * @param  string|null  $queue
      *
-     * @return \Illuminate\Contracts\Queue\Job|null
+     * @return Job|null
      */
     public function pop($queue = null)
     {
@@ -162,7 +134,7 @@ class SqsDiskQueue extends SqsQueue
     }
 
     /**
-     * Delete all of the jobs from the queue.
+     * Delete all the jobs from the queue.
      *
      * @param  string  $queue
      *
