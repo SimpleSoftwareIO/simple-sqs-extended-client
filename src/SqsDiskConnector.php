@@ -25,7 +25,9 @@ class SqsDiskConnector extends SqsConnector implements ConnectorInterface
         }
 
         return new SqsDiskQueue(
-            new SqsClient($config),
+            new SqsClient(
+                Arr::except($config, ['token'])
+            ),
             $config['queue'],
             $config['disk_options'],
             $config['prefix'] ?? '',
