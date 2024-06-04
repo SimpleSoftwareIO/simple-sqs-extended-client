@@ -1,5 +1,7 @@
 # Simple SQS Extended Client
 
+> The package has been moved to https://github.com/DefectiveCode/laravel-sqs-extended. Please read the migration guide and update your project accordingly.
+
 ## Introduction
 
 Simple SQS Extended Client is a Laravel queue driver that was designed to work around the AWS SQS 256KB payload size limits.  This queue driver will automatically serialize large payloads to a disk (typically S3) and then unserialize them at run time. 
