@@ -20,11 +20,11 @@
         "php": ">=8.0",
         "aws/aws-sdk-php": "^3.189.0",
         "league/flysystem": "~3",
-        "illuminate/container": "~9|~10",
-        "illuminate/contracts": "~9|~10",
-        "illuminate/filesystem": "~9|~10",
-        "illuminate/queue": "~9|~10",
-        "illuminate/support": "~9|~10"
+        "illuminate/container": "~9|~10|~11",
+        "illuminate/contracts": "~9|~10|~11",
+        "illuminate/filesystem": "~9|~10|~11",
+        "illuminate/queue": "~9|~10|~11",
+        "illuminate/support": "~9|~10|~11"
     },
     "require-dev": {
         "mockery/mockery": "~1",
